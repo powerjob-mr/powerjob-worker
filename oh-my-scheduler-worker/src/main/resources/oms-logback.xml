@@ -5,12 +5,15 @@
     <!-- ConsoleAppender：把日志输出到控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d [%t] %-5level %logger{36}.%M\(%file:%line\) - %msg%n</pattern>
+            <pattern>222222%d [%t] %-5level %logger{36}.%M\(%file:%line\) - %msg%n</pattern>
             <!-- 控制台也要使用UTF-8，不要使用GBK，否则会中文乱码 -->
             <charset>UTF-8</charset>
         </encoder>
     </appender>
 
+    <logger name="com.zaxxer.hikari" level="ERROR">
+        <appender-ref ref="STDOUT"/>
+    </logger>
 
     <logger name="com.github.kfcfans.oms" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
