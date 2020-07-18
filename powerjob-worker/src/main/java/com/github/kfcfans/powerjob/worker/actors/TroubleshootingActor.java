@@ -20,6 +20,6 @@ public class TroubleshootingActor extends AbstractActor {
     }
 
     public void onReceiveDeadLetter(DeadLetter dl) {
-        log.warn("[IndianActor] receive DeadLetter: {}", dl);
+        log.warn("[TroubleshootingActor] receive DeadLetter: {}", dl);
     }
 }
