@@ -6,6 +6,7 @@
         <artifactId>powerjob</artifactId>
         <groupId>tech.powerjob</groupId>
         <version>5.1.7</version>
+        <relativePath>../../powerjob-common/pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -125,6 +126,14 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <excludesFile>surefire-excludes.txt</excludesFile>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>

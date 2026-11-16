@@ -1,0 +1,79 @@
+{
+  "upstream": "https://github.com/PowerJob/PowerJob",
+  "upstream_branch": "master",
+  "upstream_commit": "d92ad66277ca54e14e2835b2e5a6aaf01f620684",
+  "upstream_version": "5.1.7",
+  "repository": "powerjob-worker",
+  "kind": "library",
+  "modules": [
+    "powerjob-worker",
+    "powerjob-worker-spring-boot-starter",
+    "powerjob-official-processors"
+  ],
+  "retained_paths": [
+    "LICENSE",
+    "README.md",
+    "README_zhCN.md",
+    "SECURITY.md",
+    ".gitignore",
+    "others/images/",
+    "powerjob-worker/",
+    "powerjob-worker-spring-boot-starter/",
+    "powerjob-official-processors/"
+  ],
+  "historical_paths": [
+    "README_enUS.md",
+    "oh-my-scheduler-worker/",
+    "powerjob-worker-starter/",
+    "powerjob-offical-processors/"
+  ],
+  "dependencies": {
+    "powerjob-common": {
+      "artifacts": [
+        "tech.powerjob:powerjob (parent POM)",
+        "tech.powerjob:powerjob-common",
+        "tech.powerjob:powerjob-remote-framework",
+        "tech.powerjob:powerjob-remote-impl-akka",
+        "tech.powerjob:powerjob-remote-impl-http",
+        "tech.powerjob:powerjob-remote-impl-mu"
+      ],
+      "default_path": "../powerjob-common"
+    }
+  },
+  "excluded_tests": [
+    {
+      "module": "powerjob-worker",
+      "test": "tech.powerjob.worker.test.function.IdleTest",
+      "reason": "Functional test: needs a running server; one method waits until timed out and the other throws NullPointerException without an initialised worker runtime."
+    },
+    {
+      "module": "powerjob-worker",
+      "test": "tech.powerjob.worker.test.function.MonitorTest#testGetSystemLoadAverage",
+      "reason": "Prints the load average 10,000 times with a one-second sleep (about 2.8 hours)."
+    },
+    {
+      "module": "powerjob-worker-spring-boot-starter",
+      "test": "tech.powerjob.worker.autoconfigure.PowerJobAutoConfigurationTest",
+      "reason": "Needs a server address: worker initialisation fails with 'serverAddress can't be empty'."
+    },
+    {
+      "module": "powerjob-official-processors",
+      "test": "tech.powerjob.official.processors.impl.FileCleanupProcessorTest#testCleanWorkerScript",
+      "reason": "Walks the whole filesystem from '/'; in a container it loops on /dev/fd (FileSystemLoopException)."
+    },
+    {
+      "module": "powerjob-official-processors",
+      "test": "tech.powerjob.official.processors.impl.sql.DynamicDatasourceSqlProcessorTest#testProcess",
+      "reason": "Needs MySQL at localhost:3306."
+    },
+    {
+      "module": "powerjob-official-processors",
+      "test": "tech.powerjob.official.processors.impl.sql.SpringDatasourceSqlProcessorTest",
+      "reason": "Stale: its MySQL-style DDL (bigint(20)) is rejected by H2 2.2.224, the version the build uses."
+    }
+  ],
+  "test_jvm_options": [],
+  "verified_java": 8,
+  "build_command": "mvn -B clean verify",
+  "filter_tool": "git-filter-repo a40bce548d2c"
+}

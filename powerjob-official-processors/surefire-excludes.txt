@@ -1,0 +1,4 @@
+# Upstream tests that cannot pass in a clean build; reasons are in split.json.
+**/FileCleanupProcessorTest.java#testCleanWorkerScript
+**/DynamicDatasourceSqlProcessorTest.java#testProcess
+**/SpringDatasourceSqlProcessorTest.java
